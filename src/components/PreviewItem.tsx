@@ -38,9 +38,11 @@ export default function PreviewItem({
       .to(previewTitleRef.current, { yPercent: -100, ease: 'none' }, 0);
   }, []);
 
+  const onClick = () => {};
+
   return (
     <div className='preview' ref={previewRef}>
-      <div className='preview__img__wrapper'>
+      <div className='preview__img__wrapper' onClick={onClick}>
         <div className='preview__img'>
           <div
             className='preview__img__inner'
