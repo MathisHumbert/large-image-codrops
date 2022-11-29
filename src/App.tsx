@@ -22,15 +22,16 @@ function raf(time: any) {
 requestAnimationFrame(raf);
 
 export default function App() {
-  useEffect(() => {
-    document.querySelectorAll('.content')[0].classList.add('content--current');
-  }, []);
+  // useEffect(() => {
+  //   document.querySelectorAll('.content')[0].classList.add('content--current');
+  // }, []);
+
   return (
     <>
       <Frame />
       <section className='preview__wrapper'>
         {previewItems.map((preview) => (
-          <PreviewItem key={preview.id} {...preview} />
+          <PreviewItem key={preview.id} {...preview} lenis={lenis} />
         ))}
       </section>
       <section className='content__wrapper'>

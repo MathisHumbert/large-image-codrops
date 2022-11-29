@@ -6,7 +6,6 @@ type Props = {
   subtitle: string;
   author: string;
   description: string;
-  img: string;
   subimg: string[];
 };
 
@@ -15,32 +14,32 @@ export default function ContentItem({
   subtitle,
   author,
   description,
-  img,
   subimg,
 }: Props) {
   return (
     <div className='content'>
       <div className='content__group'>
         <div className='content__title'>
-          <span className='oh'>{title}</span>
-          <span className='oh'>{subtitle}</span>
+          <span className='oh'>
+            <span className='oh__inner'>{title}</span>
+          </span>
+          <span className='oh'>
+            <span className='oh__inner'>{subtitle}</span>
+          </span>
         </div>
-        <div className='content__meta oh'>{author}</div>
+        <div className='content__meta oh'>
+          <span className='oh__inner'>{author}</span>
+        </div>
         <div className='content__text'>{description}</div>
       </div>
-      <div className='preview__thumbs'>
+      <div className='content__thumbs'>
         {subimg.map((img) => (
           <div
+            key={img}
             className='content__thumbs__item'
             style={{ backgroundImage: `url('${img}')` }}
           ></div>
         ))}
-      </div>
-      <div className='preview__img'>
-        <div
-          className='preview__img__inner'
-          style={{ backgroundImage: `url('${img}')` }}
-        ></div>
       </div>
     </div>
   );
