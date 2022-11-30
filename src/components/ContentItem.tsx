@@ -10,6 +10,7 @@ type Props = {
 };
 
 export default function ContentItem({
+  id,
   title,
   subtitle,
   author,
@@ -17,7 +18,7 @@ export default function ContentItem({
   subimg,
 }: Props) {
   return (
-    <div className='content'>
+    <div className='content' data-id={id}>
       <div className='content__group'>
         <div className='content__title'>
           <span className='oh'>

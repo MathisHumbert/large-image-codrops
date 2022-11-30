@@ -2,8 +2,10 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Flip } from 'gsap/Flip';
-import getAdjacentItems from '../utils/getAdjacentItems';
 import Lenis from '@studio-freight/lenis';
+
+import getAdjacentItems from '../utils/getAdjacentItems';
+import usePage from '../context/pageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(Flip);
@@ -25,9 +27,10 @@ export default function PreviewItem({
   description,
   lenis,
 }: Props) {
+  const { setAdjacentItems, setScaleImg } = usePage();
   const previewRef = useRef(null);
   const previewImgRef = useRef<HTMLDivElement>(null);
-  const previewImgInnerRef = useRef(null);
+  const previewImgInnerRef = useRef<HTMLDivElement>(null);
   const previewTitleRef = useRef(null);
   const titleInnerRef = useRef(null);
   const subtitleInnerRef = useRef(null);
@@ -54,7 +57,6 @@ export default function PreviewItem({
     const previewItems = document.querySelectorAll('.preview');
     const previewItem = previewItems[id - 1];
     const contentItem = document.querySelectorAll('.content')[id - 1];
-
     const contentTitles = contentItem.querySelectorAll(
       '.content__title .oh__inner'
     );
@@ -67,6 +69,12 @@ export default function PreviewItem({
     const backButton = document.querySelector('.action__back');
 
     const adjacentItems = getAdjacentItems(previewItem, previewItems);
+    setAdjacentItems(adjacentItems);
+
+    const scaleImg =
+      previewImgInnerRef.current!.getBoundingClientRect().height /
+      previewImgInnerRef.current!.offsetHeight;
+    setScaleImg(scaleImg);
 
     const tl = gsap.timeline({
       defaults: { duration: 1.5, ease: 'power4.inOut' },
@@ -82,7 +90,6 @@ export default function PreviewItem({
         });
         gsap.set(backButton, { opacity: 0 });
       },
-      onComplete: () => {},
     });
 
     for (const el of adjacentItems) {

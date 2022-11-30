@@ -22,10 +22,6 @@ function raf(time: any) {
 requestAnimationFrame(raf);
 
 export default function App() {
-  // useEffect(() => {
-  //   document.querySelectorAll('.content')[0].classList.add('content--current');
-  // }, []);
-
   return (
     <>
       <Frame />
@@ -38,7 +34,7 @@ export default function App() {
         {contentItems.map((content) => (
           <ContentItem key={content.id} {...content} />
         ))}
-        <BackButton />
+        <BackButton lenis={lenis} />
       </section>
     </>
   );

@@ -273,7 +273,12 @@ CONTENT
 
 .content .preview__img {
   grid-area: img;
+  pointer-events: none;
 }
+
+/* 
+BACK BUTTON
+*/
 
 .unbutton {
   font: inherit;
