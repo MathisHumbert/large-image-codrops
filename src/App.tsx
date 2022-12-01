@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
+import imagesLoaded from 'imagesloaded';
 
 import Frame from './components/Frame';
 import PreviewItem from './components/PreviewItem';
@@ -22,6 +23,21 @@ function raf(time: any) {
 requestAnimationFrame(raf);
 
 export default function App() {
+  useEffect(() => {
+    const previewImgs = document.querySelectorAll('.preview__img__inner');
+    const contentImgs = document.querySelectorAll('.content__thumbs__item');
+
+    const images = [...previewImgs, ...contentImgs];
+
+    const imgLoaded = imagesLoaded(images, {
+      background: true,
+    });
+
+    imgLoaded.on('done', () => {
+      document.body.classList.remove('loading');
+    });
+  }, []);
+
   return (
     <>
       <Frame />
