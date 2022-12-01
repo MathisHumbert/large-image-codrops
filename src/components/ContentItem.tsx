@@ -1,4 +1,6 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
+import SplitType from 'split-type';
+import wrapLines from '../utils/wrapLines';
 
 type Props = {
   id: number;
@@ -17,6 +19,29 @@ export default function ContentItem({
   description,
   subimg,
 }: Props) {
+  const contentTextRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const splitTypeInstance = new SplitType(contentTextRef.current!, {
+      types: 'lines',
+    });
+
+    wrapLines(splitTypeInstance.lines!, 'div', 'oh');
+
+    const onWindowResize = () => {
+      // @ts-ignore
+      splitTypeInstance.split();
+
+      wrapLines(splitTypeInstance.lines!, 'div', 'oh');
+    };
+
+    window.addEventListener('resize', onWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', onWindowResize);
+    };
+  }, []);
+
   return (
     <div className='content' data-id={id}>
       <div className='content__group'>
@@ -31,7 +56,9 @@ export default function ContentItem({
         <div className='content__meta oh'>
           <span className='oh__inner'>{author}</span>
         </div>
-        <div className='content__text'>{description}</div>
+        <div className='content__text' ref={contentTextRef}>
+          {description}
+        </div>
       </div>
       <div className='content__thumbs'>
         {subimg.map((img) => (

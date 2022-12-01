@@ -15,6 +15,9 @@ export default function BackButton({ lenis }: { lenis: Lenis }) {
       '.content__title .oh__inner'
     );
     const contentMeta = contentItem.querySelector('.content__meta .oh__inner');
+    const contentText = contentItem.querySelectorAll(
+      '.content__text .oh .line'
+    );
     const contentThumbs = contentItem.querySelectorAll(
       '.content__thumbs__item'
     );
@@ -42,9 +45,10 @@ export default function BackButton({ lenis }: { lenis: Lenis }) {
       },
     });
 
-    tl.to(contentTitles, { yPercent: -101, opacity: 0, stagger: 0.05 }, 0)
+    tl.to(backButtonRef.current, { opacity: 0 }, 0)
+      .to(contentTitles, { yPercent: -101, opacity: 0, stagger: 0.05 }, 0)
       .to(contentMeta, { yPercent: -101, opacity: 0 }, 0)
-      .to(backButtonRef.current, { opacity: 0 }, 0)
+      .to(contentText, { yPercent: -105, stagger: 0.02 }, 0)
       .to(contentThumbs, { yPercent: 150, scale: 0, stagger: -0.05 }, 0)
       .addLabel('preview', 0.15)
       .add(() => {
@@ -75,8 +79,6 @@ export default function BackButton({ lenis }: { lenis: Lenis }) {
       )
       .to(previewDescription, { yPercent: 0, opacity: 1 }, 'preview')
       .to(previewImgInner, { scaleY: scaleImg }, 'preview');
-
-    // lines
   };
 
   return (

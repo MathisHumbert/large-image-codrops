@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Frame() {
   return (
     <div className='frame'>
@@ -16,7 +14,11 @@ export default function Frame() {
           ></path>
         </svg>
       </a>
-      <a href='/' target='_blank' className='frame__prev'>
+      <a
+        href='https://unreveal-effects-codrops.vercel.app/'
+        target='_blank'
+        className='frame__prev'
+      >
         Previous demo
       </a>
       <a

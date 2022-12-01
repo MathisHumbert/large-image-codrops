@@ -63,6 +63,9 @@ export default function PreviewItem({
     const contentMeta = contentItem.querySelectorAll(
       '.content__meta .oh__inner'
     );
+    const contentText = contentItem.querySelectorAll(
+      '.content__text .oh .line'
+    );
     const contentThumbs = contentItem.querySelectorAll(
       '.content__thumbs__item'
     );
@@ -83,6 +86,7 @@ export default function PreviewItem({
         document.body.classList.add('content-open');
         contentItem.classList.add('content--current');
         gsap.set([contentTitles, contentMeta], { yPercent: -101, opacity: 0 });
+        gsap.set(contentText, { yPercent: -105 });
         gsap.set(contentThumbs, {
           transformOrigin: '0% 0%',
           yPercent: 150,
@@ -124,9 +128,8 @@ export default function PreviewItem({
       .to(backButton, { opacity: 1 }, 'content')
       .to(contentTitles, { yPercent: 0, opacity: 1, stagger: -0.05 }, 'content')
       .to(contentMeta, { yPercent: 0, opacity: 1 }, 'content')
+      .to(contentText, { yPercent: 0, stagger: 0.1 }, 'content')
       .to(contentThumbs, { scale: 1, yPercent: 0, stagger: -0.05 }, 'content');
-
-    // lines
   };
 
   return (
